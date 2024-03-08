@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/08 21:21:26 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:43:50 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	check_map(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'C')
-				error("INVALID MAP");
-			if (map[i][j] == 'E')
+			if (map[i][j] == 'C' || map[i][j] == 'E')
 				error("INVALID MAP");
 			j++;
 		}

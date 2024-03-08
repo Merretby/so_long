@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/08 21:17:44 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:45:39 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void  floodfill(int x, int y, char **map, t_track *game)
 {
 	if (map[x][y] == '1')
 		return ;
-	if(map[x][y] == 'E')
-		game->flag = 1;
 	map[x][y] = '1';
 	floodfill(x + 1, y, map, game);
  	floodfill(x - 1, y, map, game);

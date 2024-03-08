@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/06 13:03:09 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:29:02 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdlib.h>
 # include <limits.h> 
 # include <fcntl.h>
+
+typedef struct s_tarck
+{
+    int x;
+    int y;
+}   t_track;
 
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);

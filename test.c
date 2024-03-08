@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/07 12:53:38 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:37:48 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,37 @@ void	check_2(char **tmp)
 	if (e_count != 1 || p_count != 1 || c_count == 0)
 		exit (1);
 }
+void	po_player(char **map)
+{
+	t_track position;
+	int	i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			if (map[i][j] == 'P')
+			{
+				position.x = i;
+				position.y = j;
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 
 void	read_map(char **av, char *buffer)
 {
 	int		fd;
 	int		c_line;
-	char	**tmp;
+	char	**map;
+	char	**cpy_map;
 	char	*buffer2;
 
 	c_line = 0;
@@ -94,9 +119,11 @@ void	read_map(char **av, char *buffer)
 		c_line++;
 		free(buffer);
 	}
-	tmp = ft_split(buffer2,'\n');
-	check(tmp, c_line);
-	check_2(tmp);
+	map = ft_split(buffer2,'\n');
+	check(map, c_line);
+	check_2(map);
+	cpy_map = ft_split(buffer2, '\n');
+	po_player(cpy_map);
 }
 
 int	main(int ac, char **av)

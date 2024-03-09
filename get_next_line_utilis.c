@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 10:44:49 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/06 13:16:02 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:02:14 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_strchr(char *str, int c)
 
 char	*ft_strdup(char *str)
 {
-	int	i;
+	int		i;
 	char	*ptr;
 
 	if (!str)
@@ -62,8 +62,8 @@ char	*ft_strdup(char *str)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	*ptr;
 
 	if (!s1)

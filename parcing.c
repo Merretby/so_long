@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/08 22:43:50 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:57:12 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	check(char **tmp, int c_line)
 		while (tmp[i][j])
 		{
 			if (tmp[i][j] != '0' && tmp[i][j] != '1' && tmp[i][j] != 'P'\
-			 && tmp[i][j] != 'C' && tmp[i][j] != 'E')
+			&& tmp[i][j] != 'C' && tmp[i][j] != 'E')
 				error("INVALID MAP");
 			if (tmp[0][j] != '1' || tmp[c_line - 1][j] != '1'\
-			 || tmp[i][0] != '1' || tmp[i][len - 1] != '1')
+			|| tmp[i][0] != '1' || tmp[i][len - 1] != '1')
 				error("INVALID MAP");
 			j++;
 		}
@@ -45,12 +45,10 @@ void	check_2(char **tmp, t_track *position)
 {
 	int	i;
 	int	j;
-	int	p_count;
-	int	e_count;
 
 	position->c_count = 0;
-	p_count = 0;
-	e_count = 0;
+	position->p_count = 0;
+	position->e_count = 0;
 	i = 0;
 	while (tmp[i])
 	{
@@ -60,34 +58,23 @@ void	check_2(char **tmp, t_track *position)
 			if (tmp[i][j] == 'C')
 				position->c_count++;
 			else if (tmp[i][j] == 'P')
-				p_count++;
+				position->p_count++;
 			else if (tmp[i][j] == 'E')
-				e_count++;
+				position->e_count++;
 		}
 		i++;
 	}
-	if (e_count != 1 || p_count != 1 || position->c_count == 0)
+	if (position->e_count != 1 || position->p_count != 1 \
+	|| position->c_count == 0)
 		error("INVALID MAP");
 }
 
-void	check_map(char **map)
+void	check_map(t_track *position)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'C' || map[i][j] == 'E')
-				error("INVALID MAP");
-			j++;
-		}
-		i++;
-	}
+	if (!(position->flag == 1 && position->c_count == position->c_count_cpy))
+		error("INVALID MAP");
 }
+
 void	check3(char *buffer2, t_track *position)
 {
 	char	**cpy_map;
@@ -95,7 +82,7 @@ void	check3(char *buffer2, t_track *position)
 	cpy_map = ft_split(buffer2, '\n');
 	po_player(cpy_map, position);
 	floodfill(position->x, position->y, cpy_map, position);
-	check_map(cpy_map);
+	check_map(position);
 }
 
 void	read_map(char **av, char *buffer, t_track *position)
@@ -104,21 +91,24 @@ void	read_map(char **av, char *buffer, t_track *position)
 	int		c_line;
 	char	**map;
 	char	*buffer2;
-	
+
 	c_line = 0;
+	position->c_count_cpy = 0;
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		error("INVALID MAP");
 	buffer2 = NULL;
-	while ((buffer = get_next_line(fd)))
+	buffer = get_next_line(fd);
+	while (buffer)
 	{
 		if (buffer[0] == '\n')
 			error ("INVALID MAP");
 		buffer2 = ft_strjoin(buffer2, buffer);
 		c_line++;
 		free(buffer);
+		buffer = get_next_line(fd);
 	}
-	map = ft_split(buffer2,'\n');
+	map = ft_split(buffer2, '\n');
 	check(map, c_line);
 	check_2(map, position);
 	check3(buffer2, position);

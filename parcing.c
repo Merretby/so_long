@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/09 13:57:12 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:04:26 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	check3(char *buffer2, t_track *position)
 	po_player(cpy_map, position);
 	floodfill(position->x, position->y, cpy_map, position);
 	check_map(position);
+	// free_aloc(cpy_map);
 }
 
 void	read_map(char **av, char *buffer, t_track *position)
@@ -96,7 +97,7 @@ void	read_map(char **av, char *buffer, t_track *position)
 	position->c_count_cpy = 0;
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		error("INVALID MAP");
+		error("THER IS NO FILE");
 	buffer2 = NULL;
 	buffer = get_next_line(fd);
 	while (buffer)
@@ -112,4 +113,6 @@ void	read_map(char **av, char *buffer, t_track *position)
 	check(map, c_line);
 	check_2(map, position);
 	check3(buffer2, position);
+	// free_aloc(map);
+	// free (buffer2);
 }

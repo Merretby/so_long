@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/09 13:56:30 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:34:28 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,30 @@ void	floodfill(int x, int y, char **map, t_track *game)
 	floodfill(x, y - 1, map, game);
 }
 
+void init_texture(t_game *game)
+{
+	int height_image;
+	int width_image;
+	game->texture.player_img = mlx_xpm_file_to_image(game->mlx_in,"./textures/player.xpm",&width_image,&height_image);
+	game->texture.coin_img = mlx_xpm_file_to_image(game->mlx_in,"./textures/coin.xpm",&width_image,&height_image);
+	game->texture.exit_img = mlx_xpm_file_to_image(game->mlx_in,"./textures/coin.xpm",&width_image,&height_image);
+	game->texture.wall_img = mlx_xpm_file_to_image(game->mlx_in,"./textures/coin.xpm",&width_image,&height_image);
+	game->texture.space_img = mlx_xpm_file_to_image(game->mlx_in,"./textures/coin.xpm",&width_image,&height_image);
+}
+
+
 int	main(int ac, char **av)
 {
 	char	*buffer;
 	t_track	position;
+	t_game game;
 
 	if (ac != 2)
 		exit(1);
 	buffer = NULL;
 	check_argument(av);
 	read_map(av, buffer, &position);
+	game.mlx_in = mlx_init();
+	game.mlx_window = mlx_new_window(game.mlx_in, 500, 500, "So_long");
+	mlx_loop(game.mlx_in);
 }

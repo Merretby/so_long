@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/09 13:52:18 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:15:52 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@
 # include <stdlib.h>
 # include <limits.h> 
 # include <fcntl.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include "includes_mlx/minilibx-linux/mlx.h"
+
+typedef struct s_texture
+{
+	void *player_img;
+	void *coin_img;
+	void *exit_img;
+	void *wall_img;
+	void *space_img;
+}	t_texture;
+
+typedef struct s_game
+{
+	void	*mlx_window;
+	void	*mlx_in;
+	int		bpp;//bits pir pixle
+	int		line_len;
+	t_texture texture;
+}	t_game;
+
 
 typedef struct s_tarck
 {

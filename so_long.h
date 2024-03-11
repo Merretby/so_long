@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/09 19:15:52 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:19:03 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,46 @@
 
 typedef struct s_texture
 {
-	void *player_img;
-	void *coin_img;
-	void *exit_img;
-	void *wall_img;
-	void *space_img;
+	void	*player_img_left;
+	void	*player_img_right;
+	void	*coin_img;
+	void	*exit_img_open;
+	void	*exit_img_close;
+	void	*wall_img;
+	void	*space_img;
 }	t_texture;
-
-typedef struct s_game
-{
-	void	*mlx_window;
-	void	*mlx_in;
-	int		bpp;//bits pir pixle
-	int		line_len;
-	t_texture texture;
-}	t_game;
-
 
 typedef struct s_tarck
 {
-	int	c_count_cpy;
-	int	x;
-	int	y;
-	int	flag;
-	int	c_count;
-	int	p_count;
-	int	e_count;
+	char	**map;
+	int		c_count_cpy;
+	int		x;
+	int		y;
+	int		flag;
+	int 	p_collected;
+	int		c_count;
+	int		p_count;
+	int		e_count;
 }	t_track;
+
+typedef struct s_game
+{
+	void		*mlx_window;
+	void		*mlx_in;
+	int			bpp;//bits pir pixle
+	int			line_len;
+	t_texture	texture;
+	t_track		track;
+}	t_game;
+
 //parsing
-void	check(char **tmp, int c_line);
-void	check_2(char **tmp, t_track *position);
+void	check(t_track *position, int c_line);
+void	check_2(t_track *position);
 void	check3(char *buffer2, t_track *position);
-void	read_map(char **av, char *buffer, t_track *position);
+void	parsing_map(char **av, char *buffer, t_game *game);
 void	check_map(t_track *position);
 void	floodfill(int x, int y, char **map, t_track *game);
-void	po_player(char **map, t_track *position);
+void	po_player(t_track *position);
 //hellper
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
@@ -70,6 +75,13 @@ char	**ft_split(char const *s, char c);
 void	**free_aloc(char **fr);
 void	ft_putstr(char *s);
 void	error(char *err);
+//moves
+void	move_up(int x, int y, t_game *game);
+void	move_down(int x, int y, t_game *game);
+void	move_left(int x, int y, t_game *game);
+void	move_right(int x, int y, t_game *game);
+//
+void	so_long(t_game *game);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:17:06 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/11 15:03:24 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:11:22 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	move_up(int x, int y, t_game *game)
 	game->track.map[game->track.x][game->track.y] = '0';
 	game->track.x--;
 	move_counter();
+	mlx_clear_window(game->mlx_in,game->mlx_window);
+	display_map(game, 0);
 }
 
 void	move_down(int x, int y, t_game *game)
@@ -55,6 +57,8 @@ void	move_down(int x, int y, t_game *game)
 	game->track.map[game->track.x][game->track.y] = '0';
 	game->track.x++;
 	move_counter();
+	mlx_clear_window(game->mlx_in,game->mlx_window);
+	display_map(game, 1);
 }
 
 void	move_left(int x, int y, t_game *game)
@@ -73,6 +77,8 @@ void	move_left(int x, int y, t_game *game)
 	game->track.map[game->track.x][game->track.y] = '0';
 	game->track.y--;
 	move_counter();
+	mlx_clear_window(game->mlx_in,game->mlx_window);
+	display_map(game, 0);
 }
 
 void	move_right(int x, int y, t_game *game)
@@ -91,4 +97,6 @@ void	move_right(int x, int y, t_game *game)
 	game->track.map[game->track.x][game->track.y] = '0';
 	game->track.y++;
 	move_counter();
+	mlx_clear_window(game->mlx_in,game->mlx_window);
+	display_map(game, 1);
 }

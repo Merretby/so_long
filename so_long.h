@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/10 21:19:03 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/11 20:03:57 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	move_left(int x, int y, t_game *game);
 void	move_right(int x, int y, t_game *game);
 //
 void	so_long(t_game *game);
+void	display_map(t_game *game, int flag);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

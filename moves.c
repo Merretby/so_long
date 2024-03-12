@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:17:06 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 19:48:54 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 20:55:44 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	move_counter(void)
 	static int	i;
 
 	i++;
-	printf("move : %d\n", i);
+	ft_printf("move : %d\n", i);
 }
 
 void	move_up(int x, int y, t_game *game)

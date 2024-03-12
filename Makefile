@@ -5,17 +5,22 @@ MLX_FLAG = -lmlx_Linux -includes_mlx/Lminilibx-linux  -lXext -lX11 -lm -lz
 CFILES = so_long.c get_next_line.c get_next_line_utilis.c utiles.c error.c parcing.c\
 	moves.c parcing1.c textu.c
 OFILSE = $(CFILES:.c=.o)
-
+PRINTF = printf/libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OFILSE)
-	$(CC) $(CFLAGS) $(OFILSE) $(MLX_FLAG) -o $(NAME)
+$(NAME): $(PRINTF) $(OFILSE)
+	$(CC) $(CFLAGS) $(OFILSE) $(PRINTF) $(MLX_FLAG) -o $(NAME)
+
+$(PRINTF) :
+	make -C printf
 
 clean:
 	rm -f $(OFILSE)
+	make clean -C printf
 
 fclean: clean
-	rm -f $(NAME) 
+	rm -f $(NAME)
+	make fclean -C printf
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 14:40:57 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:40:01 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include <mlx.h>
+# include "mlx/minilibx-linux/mlx.h"
 
 typedef struct s_texture
 {
@@ -57,11 +57,11 @@ typedef struct s_game
 }	t_game;
 
 //parsing
-void	check1(t_track *position, int c_l);
-void	check_2(t_track *position);
+void	check1(t_track *position, int c_l, char *buffer2);
+void	check_2(t_track *position, char *buffer2);
 void	check3(char *buffer2, t_track *position);
-void	parsing_map(char **av, char *buffer, t_game *game);
-void	check_map(t_track *position);
+void	parsing_map(char **av, char *buffer, t_game *game, int c_line);
+void	check_map(t_track *position, char *buffer2);
 void	floodfill(int x, int y, char **map, t_track *game);
 void	po_player(t_track *position);
 void	check_argument(char **av);
@@ -71,13 +71,15 @@ int		ft_strlen(char *str);
 char	*ft_strchr(char *str, int c);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *s, char c);
 void	ft_mssage(char *str);
 void	print_str(char *s);
 //for_error
 void	**free_aloc(char **fr);
 void	ft_putstri(char *s);
 void	error(char *err);
+void	ft_error(char *err, char *tmp, t_track *game);
+void	destroy_textures(t_game *game);
 //moves
 void	move_up(int x, int y, t_game *game);
 void	move_down(int x, int y, t_game *game);

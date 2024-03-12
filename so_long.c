@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 14:42:59 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:02:54 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ int	keyhook(int code, t_game *game)
 		move_right(game->track.x, game->track.y + 1, game);
 	else if (code == 65307)
 	{
+		free_aloc(game->track.map);
+		mlx_destroy_window(game->mlx_in, game->mlx_window);
+		destroy_textures(game);
 		mlx_destroy_display(game->mlx_in);
 		exit (1);
 	}
@@ -98,10 +101,11 @@ int	main(int ac, char **av)
 	char	*buffer;
 	t_game	game;
 
+	game.track.c_count_cpy = 0;
 	if (ac != 2)
 		exit(1);
 	buffer = NULL;
 	check_argument(av);
-	parsing_map(av, buffer, &game);
+	parsing_map(av, buffer, &game, 0);
 	so_long(&game);
 }

@@ -6,16 +6,16 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:02:32 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 13:22:19 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:54:39 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_map(t_track *position)
+void	check_map(t_track *position, char *buffer2)
 {
 	if (!(position->flag == 1 && position->c_count == position->c_count_cpy))
-		error("INVALID MAP");
+		ft_error("INVALID MAP", buffer2, position);
 }
 
 void	**free_aloc(char **fr)
@@ -32,7 +32,7 @@ void	**free_aloc(char **fr)
 	return (0);
 }
 
-static char	*small_alloc(char const *str, int *index, char separator)
+static char	*small_alloc(char *str, int *index, char separator)
 {
 	char	*ptr;
 	int		len;
@@ -60,7 +60,7 @@ static char	*small_alloc(char const *str, int *index, char separator)
 	return (ptr);
 }
 
-static int	count_words(char const *str, char c)
+static int	count_words(char *str, char c)
 {
 	size_t	wo;
 	size_t	i;
@@ -79,7 +79,7 @@ static int	count_words(char const *str, char c)
 	return (wo);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**ptr;
 	int		i;

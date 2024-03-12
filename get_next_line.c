@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 03:02:25 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/05 17:24:10 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:03:28 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ char	*get_line(char *tmp, int i)
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
 	int			r_line;
-	static char	*tmp;
+	char		*buffer;
+	char		*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	tmp = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > 2147483647)
 		return (NULL);
 	r_line = 1;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -83,15 +84,12 @@ char	*get_next_line(int fd)
 	{
 		r_line = read(fd, buffer, BUFFER_SIZE);
 		if (r_line == -1)
-		{
-			free (buffer);
-			return (NULL);
-		}
+			return (free(buffer), NULL);
 		buffer[r_line] = '\0';
 		tmp = ft_strjoin(tmp, buffer);
 	}
-	free (buffer);
+	free(buffer);
 	buffer = read_line(tmp);
 	tmp = get_line(tmp, 0);
-	return (buffer);
+	return (free(tmp), buffer);
 }

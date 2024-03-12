@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 21:17:06 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 20:55:44 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:54:02 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	move_left(int x, int y, t_game *game)
 		if (game->track.p_collected == game->track.c_count)
 		{
 			free_aloc(game->track.map);
-			mlx_destroy_window(game->mlx_in, game->mlx_window);	
+			mlx_destroy_window(game->mlx_in, game->mlx_window);
 			destroy_textures(game);
 			mlx_destroy_display(game->mlx_in);
 			free(game->mlx_in);

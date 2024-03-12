@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:15:33 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 16:43:05 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 22:54:09 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_texture(t_game *game)
 	game->texture.space_img = mlx_xpm_file_to_image(game->mlx_in, \
 	"./textures/space.xpm", &width_image, &height_image);
 }
+
 void	destroy_textures(t_game *game)
 {
 	mlx_destroy_image(game->mlx_in, game->texture.player_img_right);

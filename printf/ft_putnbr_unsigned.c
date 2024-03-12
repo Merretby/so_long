@@ -1,57 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 20:49:13 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 13:33:08 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 05:06:26 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/11/30 22:41:54 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	error(char *err)
+int	ft_putnbr_unsigned(unsigned int n)
 {
-	ft_putstri(err);
-	exit (1);
-}
+	int	count;
 
-void	ft_mssage(char *str)
-{
-	print_str(str);
-	exit (0);
-}
-
-void	print_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	count = 0;
+	if (n <= 9)
+		count += ft_putchar(n + '0');
+	else
 	{
-		while (s[i])
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
-		write(1, "\n", 1);
+		count += ft_putnbr_unsigned(n / 10);
+		count += ft_putnbr_unsigned(n % 10);
 	}
-}
-
-void	ft_putstri(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
-	{
-		while (s[i])
-		{
-			write(2, &s[i], 1);
-			i++;
-		}
-		write(2, "\n", 1);
-	}
+	return (count);
 }

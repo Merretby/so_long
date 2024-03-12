@@ -1,57 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 20:49:13 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 13:33:08 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 03:00:01 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/12/02 04:22:14 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	error(char *err)
+int	ft_putnbr(int n)
 {
-	ft_putstri(err);
-	exit (1);
-}
+	int	count;
 
-void	ft_mssage(char *str)
-{
-	print_str(str);
-	exit (0);
-}
-
-void	print_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	count = 0;
+	if (n == -2147483648)
 	{
-		while (s[i])
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
-		write(1, "\n", 1);
+		count += ft_putstr("-2147483648");
 	}
-}
-
-void	ft_putstri(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	else if (n < 0)
 	{
-		while (s[i])
-		{
-			write(2, &s[i], 1);
-			i++;
-		}
-		write(2, "\n", 1);
+		count += ft_putchar('-');
+		count += ft_putnbr(-n);
 	}
+	else if (n <= 9)
+		count += ft_putchar(n + '0');
+	else
+	{
+		count += ft_putnbr(n / 10);
+		count += ft_putnbr(n % 10);
+	}
+	return (count);
 }

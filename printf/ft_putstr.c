@@ -1,57 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 20:49:13 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 13:33:08 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 05:02:39 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/12/02 00:02:38 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	error(char *err)
+int	ft_putstr(char *str)
 {
-	ft_putstri(err);
-	exit (1);
-}
+	int	count;
 
-void	ft_mssage(char *str)
-{
-	print_str(str);
-	exit (0);
-}
-
-void	print_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	count = 0;
+	if (!str)
 	{
-		while (s[i])
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
-		write(1, "\n", 1);
+		write(1, "(null)", 6);
+		return (6);
 	}
-}
-
-void	ft_putstri(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	while (str[count])
 	{
-		while (s[i])
-		{
-			write(2, &s[i], 1);
-			i++;
-		}
-		write(2, "\n", 1);
+		write(1, &str[count], 1);
+		count++;
 	}
+	return (count);
 }

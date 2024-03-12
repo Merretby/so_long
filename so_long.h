@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/11 20:03:57 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:40:57 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include "includes_mlx/minilibx-linux/mlx.h"
+# include <mlx.h>
 
 typedef struct s_texture
 {
@@ -40,7 +40,7 @@ typedef struct s_tarck
 	int		x;
 	int		y;
 	int		flag;
-	int 	p_collected;
+	int		p_collected;
 	int		c_count;
 	int		p_count;
 	int		e_count;
@@ -57,13 +57,14 @@ typedef struct s_game
 }	t_game;
 
 //parsing
-void	check(t_track *position, int c_line);
+void	check1(t_track *position, int c_l);
 void	check_2(t_track *position);
 void	check3(char *buffer2, t_track *position);
 void	parsing_map(char **av, char *buffer, t_game *game);
 void	check_map(t_track *position);
 void	floodfill(int x, int y, char **map, t_track *game);
 void	po_player(t_track *position);
+void	check_argument(char **av);
 //hellper
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
@@ -71,18 +72,23 @@ char	*ft_strchr(char *str, int c);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char const *s, char c);
+void	ft_mssage(char *str);
+void	print_str(char *s);
 //for_error
 void	**free_aloc(char **fr);
-void	ft_putstr(char *s);
+void	ft_putstri(char *s);
 void	error(char *err);
 //moves
 void	move_up(int x, int y, t_game *game);
 void	move_down(int x, int y, t_game *game);
 void	move_left(int x, int y, t_game *game);
 void	move_right(int x, int y, t_game *game);
-//
+//so_long
+void	init_texture(t_game *game);
 void	so_long(t_game *game);
 void	display_map(t_game *game, int flag);
+void	po_player(t_track *position);
+int		lentgh(char **map);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

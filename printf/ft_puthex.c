@@ -1,57 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 20:49:13 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 13:33:08 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 22:59:52 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/11/30 22:44:46 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "ft_printf.h"
 
-void	error(char *err)
+int	ft_puthex(unsigned int nb, const char format)
 {
-	ft_putstri(err);
-	exit (1);
-}
+	int	count;
 
-void	ft_mssage(char *str)
-{
-	print_str(str);
-	exit (0);
-}
-
-void	print_str(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	count = 0;
+	if (nb < 16)
 	{
-		while (s[i])
+		if (nb <= 9)
+			count += ft_putchar(nb + '0');
+		else
 		{
-			write(1, &s[i], 1);
-			i++;
+			if (format == 'x')
+				count += ft_putchar(nb - 10 + 'a');
+			else if (format == 'X')
+				count += ft_putchar(nb - 10 + 'A');
 		}
-		write(1, "\n", 1);
 	}
-}
-
-void	ft_putstri(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	else if (nb >= 16)
 	{
-		while (s[i])
-		{
-			write(2, &s[i], 1);
-			i++;
-		}
-		write(2, "\n", 1);
+		count += ft_puthex(nb / 16, format);
+		count += ft_puthex(nb % 16, format);
 	}
+	return (count);
 }

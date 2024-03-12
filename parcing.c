@@ -6,36 +6,43 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/10 20:05:37 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:45:43 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check(t_track *position, int c_line)
+void	check(t_game *game, int c_line, char *buffer2)
+{
+	check1(&game->track, c_line);
+	check_2(&game->track);
+	check3(buffer2, &game->track);
+}
+
+void	check1(t_track *position, int c_l)
 {
 	int	i;
 	int	j;
-	int	len;
 
 	i = 0;
-	len = ft_strlen(position->map[i]);
 	while (position->map[i])
 	{
 		j = 0;
 		while (position->map[i][j])
 		{
-			if (position->map[i][j] != '0' && position->map[i][j] != '1' &&\
-			position->map[i][j] != 'P' && position->map[i][j] != 'C' && position->map[i][j] != 'E')
+			if (position->map[i][j] != '0' && position->map[i][j] != '1' && \
+			position->map[i][j] != 'P' && \
+			position->map[i][j] != 'C' && position->map[i][j] != 'E')
 				error("INVALID MAP");
-			if (position->map[0][j] != '1' || position->map[c_line - 1][j] != '1'\
-			|| position->map[i][0] != '1' || position->map[i][len - 1] != '1')
+			if (position->map[0][j] != '1' || \
+			position->map[c_l - 1][j] != '1' || position->map[i][0] != '1' || \
+			position->map[i][ft_strlen(position->map[i]) - 1] != '1')
 				error("INVALID MAP");
 			j++;
 		}
-		if (++i < c_line)
+		if (++i < c_l)
 		{
-			if (len != ft_strlen(position->map[i]))
+			if (ft_strlen(position->map[1]) != ft_strlen(position->map[i]))
 				error("INVALID MAP");
 		}
 	}
@@ -69,12 +76,6 @@ void	check_2(t_track *position)
 		error("INVALID MAP");
 }
 
-void	check_map(t_track *position)
-{
-	if (!(position->flag == 1 && position->c_count == position->c_count_cpy))
-		error("INVALID MAP");
-}
-
 void	check3(char *buffer2, t_track *position)
 {
 	char	**cpy_map;
@@ -83,7 +84,6 @@ void	check3(char *buffer2, t_track *position)
 	po_player(position);
 	floodfill(position->x, position->y, cpy_map, position);
 	check_map(position);
-	// free_aloc(cpy_map);
 }
 
 void	parsing_map(char **av, char *buffer, t_game *game)
@@ -111,9 +111,6 @@ void	parsing_map(char **av, char *buffer, t_game *game)
 		buffer = get_next_line(fd);
 	}
 	game->track.map = ft_split(buffer2, '\n');
-	check(&game->track, c_line);
-	check_2(&game->track);
-	check3(buffer2, &game->track);
-	// free_aloc(map);
-	// free (buffer2);
+	check(game, c_line, buffer2);
+	free (buffer2);
 }

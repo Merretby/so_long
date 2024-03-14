@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 00:11:25 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/14 22:53:54 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,22 @@ int	keyhook(int code, t_game *game)
 	return (1);
 }
 
+int ft_close(t_game *game)
+{
+	free_aloc(game->track.map);
+	mlx_destroy_window(game->mlx_in, game->mlx_window);
+	destroy_textures(game);
+	mlx_destroy_display(game->mlx_in);
+	free(game->mlx_in);
+	exit (0);
+}
 void	so_long(t_game *game)
 {
+	if (ft_strlen(game->track.map[0]) > 30 || lentgh(game->track.map) > 16)
+	{
+		free_aloc(game->track.map);
+		exit (1);
+	}
 	game->track.p_collected = 0;
 	game->mlx_in = mlx_init();
 	game->mlx_window = mlx_new_window(game->mlx_in, \
@@ -94,6 +108,7 @@ void	so_long(t_game *game)
 	init_texture(game);
 	display_map(game, 1);
 	mlx_key_hook(game->mlx_window, &keyhook, game);
+	mlx_hook(game->mlx_window, DestroyNotify, 0 , &ft_close, game);
 	mlx_loop(game->mlx_in);
 }
 

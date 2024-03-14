@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 03:00:01 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 01:09:23 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 05:02:39 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/12/02 00:02:38 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int n)
+int	ft_putstr(char *str)
 {
 	int	count;
 
 	count = 0;
-	if (n == -2147483648)
+	if (!str)
 	{
-		count += ft_putstr("-2147483648");
+		write(1, "(null)", 6);
+		return (6);
 	}
-	else if (n < 0)
+	while (str[count])
 	{
-		count += ft_putchar('-');
-		count += ft_putnbr(-n);
-	}
-	else if (n <= 9)
-		count += ft_putchar(n + '0');
-	else
-	{
-		count += ft_putnbr(n / 10);
-		count += ft_putnbr(n % 10);
+		write(1, &str[count], 1);
+		count++;
 	}
 	return (count);
 }

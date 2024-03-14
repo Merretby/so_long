@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 03:00:01 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 01:09:23 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 02:46:19 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/12/02 03:14:30 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_putnbr(int n)
-{
-	int	count;
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <stdarg.h>
 
-	count = 0;
-	if (n == -2147483648)
-	{
-		count += ft_putstr("-2147483648");
-	}
-	else if (n < 0)
-	{
-		count += ft_putchar('-');
-		count += ft_putnbr(-n);
-	}
-	else if (n <= 9)
-		count += ft_putchar(n + '0');
-	else
-	{
-		count += ft_putnbr(n / 10);
-		count += ft_putnbr(n % 10);
-	}
-	return (count);
-}
+int	ft_printf(const char *format, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_pointer(unsigned long nb);
+int	ft_putnbr(int n);
+int	ft_putnbr_unsigned(unsigned int n);
+int	ft_puthex(unsigned int nb, const char format);
+
+#endif

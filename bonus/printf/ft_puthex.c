@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 03:00:01 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 01:09:23 by moer-ret         ###   ########.fr       */
+/*   Created: 2023/11/29 22:59:52 by moer-ret          #+#    #+#             */
+/*   Updated: 2023/11/30 22:44:46 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int n)
+int	ft_puthex(unsigned int nb, const char format)
 {
 	int	count;
 
 	count = 0;
-	if (n == -2147483648)
+	if (nb < 16)
 	{
-		count += ft_putstr("-2147483648");
+		if (nb <= 9)
+			count += ft_putchar(nb + '0');
+		else
+		{
+			if (format == 'x')
+				count += ft_putchar(nb - 10 + 'a');
+			else if (format == 'X')
+				count += ft_putchar(nb - 10 + 'A');
+		}
 	}
-	else if (n < 0)
+	else if (nb >= 16)
 	{
-		count += ft_putchar('-');
-		count += ft_putnbr(-n);
-	}
-	else if (n <= 9)
-		count += ft_putchar(n + '0');
-	else
-	{
-		count += ft_putnbr(n / 10);
-		count += ft_putnbr(n % 10);
+		count += ft_puthex(nb / 16, format);
+		count += ft_puthex(nb % 16, format);
 	}
 	return (count);
 }

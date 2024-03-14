@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 16:16:39 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:42:49 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check(t_game *game, int c_line, char *buffer2)
 {
@@ -32,7 +32,7 @@ void	check1(t_track *position, int c_l, char *buffer2)
 		while (position->map[i][j])
 		{
 			if (position->map[i][j] != '0' && position->map[i][j] != '1' && \
-			position->map[i][j] != 'P' && \
+			position->map[i][j] != 'P' && position->map[i][j] != 'X' &&\
 			position->map[i][j] != 'C' && position->map[i][j] != 'E')
 				ft_error("INVALID MAP", buffer2, position);
 			if (position->map[0][j] != '1' || \
@@ -74,7 +74,7 @@ void	check_2(t_track *position, char *buffer2)
 	}
 	if (position->e_count != 1 || position->p_count != 1 \
 	|| position->c_count == 0)
-		ft_error("U NEDD 1E 1P >1C", buffer2, position);
+		ft_error("U NEDD 1E 1P 1X >1C", buffer2, position);
 }
 
 void	check3(char *buffer2, t_track *position)
@@ -104,6 +104,7 @@ void	parsing_map(char **av, char *buffer, t_game *game, int c_line)
 	{
 		if (buffer[0] == '\n')
 		{
+			game->track.map = NULL;
 			free (buffer);
 			ft_error ("THER IS A NEW LINE :(", buffer2, &game->track);
 		}

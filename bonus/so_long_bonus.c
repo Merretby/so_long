@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:29:53 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 00:11:25 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:51:26 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void	to_fix_nor(t_game *game, int i, int j)
+void	to_fix_nor(t_game *game, int i, int j, int x)
 {
+	static int h;
+
 	if (game->track.map[i][j] == '1')
 		mlx_put_image_to_window(game->mlx_in, game->mlx_window, \
 		game->texture.wall_img, j * 64, i * 64);
@@ -29,9 +31,20 @@ void	to_fix_nor(t_game *game, int i, int j)
 			mlx_put_image_to_window(game->mlx_in, game->mlx_window, \
 			game->texture.exit_img_open, j * 64, i * 64);
 	}
-	else
+	else if (game->track.map[i][j] == 'C')
 		mlx_put_image_to_window(game->mlx_in, game->mlx_window, \
 		game->texture.coin_img, j * 64, i * 64);
+	else
+	{
+		if (x % 100 == 0)
+		{
+			mlx_put_image_to_window(game->mlx_in, game->mlx_window, \
+				game->array[h] , j * 64, i * 64);
+			h++;
+			if (h > 3)
+				h = 0;
+		}
+	}
 }
 
 void	display_map(t_game *game, int flag)
@@ -47,7 +60,7 @@ void	display_map(t_game *game, int flag)
 		{
 			if (game->track.map[i][j] == 'P')
 			{
-				if (flag == 1)
+				if (flag == -1)
 					mlx_put_image_to_window(game->mlx_in, game->mlx_window, \
 					game->texture.player_img_right, j * 64, i * 64);
 				else if (flag == 0)
@@ -55,7 +68,7 @@ void	display_map(t_game *game, int flag)
 					game->texture.player_img_left, j * 64, i * 64);
 			}
 			else
-				to_fix_nor(game, i, j);
+				to_fix_nor(game, i, j, flag);
 			j++;
 		}
 		i++;
@@ -83,6 +96,14 @@ int	keyhook(int code, t_game *game)
 	}
 	return (1);
 }
+int	animation(t_game *game)
+{
+	static int x;
+
+	x++;
+	display_map(game, x);
+	return (x);
+}
 
 void	so_long(t_game *game)
 {
@@ -92,8 +113,9 @@ void	so_long(t_game *game)
 	ft_strlen(game->track.map[0]) * 64, \
 	lentgh(game->track.map) * 64, "So_long");
 	init_texture(game);
-	display_map(game, 1);
+	display_map(game, 0);
 	mlx_key_hook(game->mlx_window, &keyhook, game);
+	mlx_loop_hook(game->mlx_in, &animation, game);
 	mlx_loop(game->mlx_in);
 }
 

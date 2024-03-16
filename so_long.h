@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 19:31:36 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 20:59:17 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:29:49 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include "mlx/minilibx-linux/mlx.h"
+# include "mlx.h"
 
 typedef struct s_texture
 {
@@ -50,7 +50,6 @@ typedef struct s_game
 {
 	void		*mlx_window;
 	void		*mlx_in;
-	int			bpp;//bits pir pixle
 	int			line_len;
 	t_texture	texture;
 	t_track		track;
@@ -72,10 +71,10 @@ char	*ft_strchr(char *str, int c);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
-void	ft_mssage(char *str);
+void	ft_message(char *str);
 void	print_str(char *s);
 //for_error
-void	**free_aloc(char **fr);
+void	ft_free(char **fr);
 void	ft_putstri(char *s);
 void	error(char *err);
 void	ft_error(char *err, char *tmp, t_track *game);
@@ -91,7 +90,7 @@ void	so_long(t_game *game);
 void	display_map(t_game *game, int flag);
 void	po_player(t_track *position);
 int		lentgh(char **map);
-
+int		ft_close(t_game *game);
 int		ft_printf(char *str, ...);
 
 # ifndef BUFFER_SIZE

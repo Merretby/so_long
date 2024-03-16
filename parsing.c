@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 21:16:24 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 01:09:01 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:30:24 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	check3(char *buffer2, t_track *position)
 	cpy_map = ft_split(buffer2, '\n');
 	po_player(position);
 	floodfill(position->x, position->y, cpy_map, position);
-	free_aloc(cpy_map);
+	ft_free(cpy_map);
 	check_map(position, buffer2);
 }
 
@@ -99,7 +99,7 @@ void	parsing_map(char **av, char *buffer, t_game *game, int c_line)
 	buffer2 = NULL;
 	buffer = get_next_line(fd);
 	if (buffer == NULL)
-		error ("NULL BUFFER");
+		error ("EMPTY FILE");
 	while (buffer)
 	{
 		if (buffer[0] == '\n')

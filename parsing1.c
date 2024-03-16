@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 20:35:09 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/14 00:25:37 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:31:04 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ void	check_argument(char **av)
 	i = 0;
 	format_map = ".ber\0";
 	ber = ft_strchr(av[1], '.');
+	if (ber == NULL)
+		error("ERROR");
 	while (ber[i])
 	{
 		if (format_map[i] != ber[i])
-			exit(1);
+			error("ERROR");
 		i++;
 	}
 }
@@ -78,4 +80,14 @@ int	lentgh(char **map)
 	while (map[i])
 		i++;
 	return (i);
+}
+
+int	ft_close(t_game *game)
+{
+	ft_free(game->track.map);
+	mlx_destroy_window(game->mlx_in, game->mlx_window);
+	destroy_textures(game);
+	mlx_destroy_display(game->mlx_in);
+	free(game->mlx_in);
+	exit (0);
 }

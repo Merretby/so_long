@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 10:44:49 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/09 13:02:14 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:28:55 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	ptr[i] = '\0';
 	free(s1);
 	return (ptr);
+}
+void	ft_free(char **fr)
+{
+	size_t	i;
+
+	i = 0;
+	while (fr[i])
+	{
+		free(fr[i]);
+		i++;
+	}
+	free (fr);
 }

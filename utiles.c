@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:02:32 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/12 15:54:39 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:27:07 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_map(t_track *position, char *buffer2)
 		ft_error("INVALID MAP", buffer2, position);
 }
 
-void	**free_aloc(char **fr)
+static void	**free_aloc(char **fr)
 {
 	size_t	i;
 

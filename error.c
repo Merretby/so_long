@@ -6,7 +6,7 @@
 /*   By: moer-ret <moer-ret@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 20:49:13 by moer-ret          #+#    #+#             */
-/*   Updated: 2024/03/13 19:43:48 by moer-ret         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:29:20 by moer-ret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	error(char *err)
 void	ft_error(char *err, char *tmp, t_track *game)
 {
 	if (game->map != NULL )
-		free_aloc(game->map);
+		ft_free(game->map);
 	free (tmp);
 	ft_putstri(err);
 	exit (1);
 }
 
-void	ft_mssage(char *str)
+void	ft_message(char *str)
 {
 	print_str(str);
 	exit (0);
